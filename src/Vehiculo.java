@@ -4,20 +4,24 @@ public class Vehiculo {
     private String modelo;
     private int anio;
     private  String color;
-    private int precio;
+    private double precio;
 
     public Vehiculo(){}
 
-    public Vehiculo(String Placa, String Marca, String Modelo, int Anio, String Color, int Precio){
-        placa = Placa;
-        marca = Marca;
-        modelo = Modelo;
-        anio = Anio;
-        color = Color;
-        precio = Precio;
+    public Vehiculo(String Placa, String Marca, String Modelo, int Anio, String Color, double Precio){
+        SetPlaca(Placa);
+        SetMarca(Marca);
+        SetModelo(Modelo);
+        SetAnio(Anio);
+        SetColor(Color);
+        SetPrecio(Precio);;
     }
 
     public void SetPlaca(String Placa){
+        if(Placa == "")
+        {
+            return;
+        }
         placa = Placa;
     }
 
@@ -26,6 +30,10 @@ public class Vehiculo {
     }
 
     public void SetMarca(String Marca){
+        if(Marca == "")
+        {
+            return;
+        }
         marca = Marca;
     }
 
@@ -34,6 +42,10 @@ public class Vehiculo {
     }
 
     public void SetModelo(String Modelo){
+        if(Modelo == "")
+        {
+            return;
+        }
         modelo = Modelo;
     }
 
@@ -42,6 +54,10 @@ public class Vehiculo {
     }
 
     public void SetAnio(int Anio){
+        if(Anio < 0)
+        {
+            return;
+        }
         anio = Anio;
     }
 
@@ -50,6 +66,10 @@ public class Vehiculo {
     }
 
     public void SetColor(String Color){
+        if(Color == "")
+        {
+            return;
+        }
         color = Color;
     }
 
@@ -57,11 +77,15 @@ public class Vehiculo {
         return color;
     }
 
-    public void SetPrecio(int Precio){
+    public void SetPrecio(double Precio){
+        if(Precio < 0.0)
+        {
+            return;
+        }
         precio = Precio;
     }
 
-    public int GetPrecio(){
+    public double GetPrecio(){
         return precio;
     }
 }
