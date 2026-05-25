@@ -18,7 +18,7 @@ public class Vehiculo {
     }
 
     public void SetPlaca(String Placa){
-        if(Placa == "")
+        if(Placa.equals(""))
         {
             return;
         }
@@ -30,7 +30,7 @@ public class Vehiculo {
     }
 
     public void SetMarca(String Marca){
-        if(Marca == "")
+        if(Marca.equals(""))
         {
             return;
         }
@@ -42,7 +42,7 @@ public class Vehiculo {
     }
 
     public void SetModelo(String Modelo){
-        if(Modelo == "")
+        if(Modelo.equals(""))
         {
             return;
         }
@@ -54,7 +54,7 @@ public class Vehiculo {
     }
 
     public void SetAnio(int Anio){
-        if(Anio < 0)
+        if(Anio < 1900 || Anio > 2026)
         {
             return;
         }
@@ -66,7 +66,7 @@ public class Vehiculo {
     }
 
     public void SetColor(String Color){
-        if(Color == "")
+        if(Color.equals(""))
         {
             return;
         }

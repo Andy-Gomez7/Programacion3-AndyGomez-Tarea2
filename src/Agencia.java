@@ -19,44 +19,54 @@ public class Agencia{
         return null;
     }
 
-    public void Registrar(){
-        int op;
-
-        while(true){
-            System.out.print("Digite la marca del marca: ");
-            String Marca = scan.next();
-            System.out.println("\n");
-
-            System.out.print("Digite la marca del modelo: ");
-            String Modelo = scan.next();
-            System.out.println("\n");
-
-            System.out.print("Digite la marca del año: ");
-            int anio = scan.nextInt();
-            System.out.println("\n");
-
-            System.out.print("Digite la marca del Color: ");
-            String Color = scan.next();
-            System.out.println("\n");
-
-            System.out.print("Digite la marca la placa del vehiculo: ");
-            String placa = scan.next();
-            System.out.println("\n");
-
-            System.out.print("Digite la marca del precio: ");
-            double precio = scan.nextDouble();
-            System.out.println("\n");
-
-            Vehiculo nuevoVehiculo = new Vehiculo(placa, Marca, Modelo, anio, Color, precio);
-            Vehiculos.add(nuevoVehiculo);
-
-            System.out.println("Digite: \n1-Agregar otro vehiculo\n2-Salir");
-            op = scan.nextInt();
-            if(op == 2){
-                break;
-            }
-            
+    private String comprobar(String cad){
+        while(cad.isEmpty()){
+            System.out.print("\nDigite un dato valido: ");
+            cad = scan.nextLine();
         }
+        return cad;
+    }
+
+    public void Registrar(){
+        String Marca, Modelo, Color, placa;
+        int anio;
+        double precio;
+
+        scan.nextLine();
+        System.out.print("\nDigite la marca: ");
+        Marca = scan.nextLine();
+        Marca = comprobar(Marca);
+        
+        System.out.print("\nDigite el modelo: ");
+        Modelo = scan.nextLine();
+        Modelo = comprobar(Modelo);
+
+        System.out.print("\nDigite el color: ");
+        Color = scan.nextLine();
+        Color = comprobar(Color);
+
+        System.out.print("\nDigite la placa: ");
+        placa = scan.nextLine();
+        placa = comprobar(placa);
+
+        System.out.print("\nDigte el año: ");
+        anio = scan.nextInt();
+        while(anio < 1900 || anio > 2026){
+            System.out.print("\nDigite un dato valido: ");
+            anio = scan.nextInt();   
+        }
+
+        System.out.print("\nDigite el precio: ");
+        precio = scan.nextDouble();
+        while(precio < 0.0){
+            System.out.print("\nDigite un dato valido: ");
+            precio = scan.nextDouble();
+        }
+
+        scan.nextLine();
+        Vehiculo nuevoVehiculo = new Vehiculo(placa, Marca, Modelo, anio, Color, precio);
+        Vehiculos.add(nuevoVehiculo);
+        
     }
 
     public void MostrarVehiculos(){
@@ -78,14 +88,19 @@ public class Agencia{
             System.out.println("Precio: "+vehiculo.GetPrecio()+"\n");
             
             System.out.println("Placa: "+vehiculo.GetPlaca()+"\n");
+
+            System.out.println("-------------------------------------------------------\n");
         }
     }
 
     public void BuscarPlaca(String placa){
 
         Vehiculo vehiculo = Buscar(placa);
+        if(vehiculo == null){
+            System.out.println("Vehiculo no encontrado");
+        }
             
-        System.out.println("\nMarca: "+vehiculo.GetMarca()+"\n");
+        System.out.println("\n\nMarca: "+vehiculo.GetMarca()+"\n");
 
         System.out.println("Modelo: "+vehiculo.GetModelo()+"\n");
 
@@ -99,7 +114,7 @@ public class Agencia{
     }
 
     public void MostrarMarca(String Marca){
-        System.out.println("-----------------------Vehiculos"+Marca+"-----------------------\n");
+        System.out.println("\n\n-----------------------Vehiculos"+Marca+"-----------------------\n");
 
         for(Vehiculo vehiculo : Vehiculos){
 
@@ -114,7 +129,43 @@ public class Agencia{
                 System.out.println("Precio: "+vehiculo.GetPrecio()+"\n");
             
                 System.out.println("Placa: "+vehiculo.GetPlaca()+"\n");
+
+                System.out.println("-------------------------------------------------------\n");
             }
         }
+    }
+
+    public void Menu(){
+        int op;
+
+        do{
+            System.out.print("\nDigite una opcion: \n1-Resgistrar vehiculo\n2-Mostrar lista de vehiculos\n3-Buscar un vehiculo por su placa\n4-Mostrar todos los vehiculos de la marca\n5-Salir\n");
+            op = scan.nextInt();
+
+            switch(op){
+                case 1:
+                    Registrar();
+                    break;
+                case 2:
+                    MostrarVehiculos();
+                    break;
+                case 3:
+                    System.out.print("\nDigite una placa: ");
+                    scan.nextLine();
+                    String placa = scan.nextLine();
+                    BuscarPlaca(placa);
+                    break;
+                case 4:
+                    System.out.print("Digite una marca: ");
+                    scan.nextLine();
+                    String marca = scan.nextLine();
+                    MostrarMarca(marca);
+                case 5:
+                    break;
+                default:
+                    break;
+            }    
+        }while (op != 5);
+        
     }
 }
